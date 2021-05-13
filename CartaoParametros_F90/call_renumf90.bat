@@ -1,0 +1,2 @@
+cd BLUPF90_Family
+renumf90.exe

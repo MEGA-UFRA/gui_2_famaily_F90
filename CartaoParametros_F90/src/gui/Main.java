@@ -320,7 +320,7 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_viewOutputFileButtonActionPerformed
 
     private void runRENUMF90ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runRENUMF90ActionPerformed
-        
+        gerente.chamarExeRenumF90();
     }//GEN-LAST:event_runRENUMF90ActionPerformed
 
     /**

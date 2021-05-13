@@ -7,6 +7,7 @@ package manager;
 
 import io.EscritaArquivo;
 import io.LeituraArquivo;
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -81,6 +82,21 @@ public class GerenteManager {
 
     public void setCarta(CartaParametros carta) {
         this.carta = carta;
+    }
+
+    public void chamarExeRenumF90() {
+        try {
+            String bat = "call_renumf90.bat";
+//            Process runtimeProcess = Runtime.getRuntime().exec(bat, null, new File("BLUPF90_Family"));
+            Process runtimeProcess = Runtime.getRuntime().exec("cmd /c start cmd.exe /C\""+bat+"\"");
+            int processComplete = runtimeProcess.waitFor();
+            System.out.println(runtimeProcess.info());
+            System.out.println(processComplete);
+        } catch (IOException ex) {
+            Logger.getLogger(GerenteManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(GerenteManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
