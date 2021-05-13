@@ -1,27 +1,28 @@
 DATAFILE
 aval_P205.txt
 TRAITS
-0
+2
 FIELDS_PASSED TO OUTPUT
 
 WEIGHT(S)
 
 RESIDUAL_VARIANCE
-
+0.1
 EFFECT
-0 cov 
+3 cross numer
 RANDOM
----
+diagonal
 (CO)VARIANCES
-
+0.1
 EFFECT
-
+4 cross numer
 EFFECT
-
+5 cov
 EFFECT
-
+1 cross alpha
 RANDOM
-
+animal
 FILE
 gen_205.txt
 (CO)VARIANCES
+0.1
