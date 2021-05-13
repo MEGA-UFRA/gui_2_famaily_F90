@@ -5,7 +5,13 @@
  */
 package gui;
 
+import java.io.File;
+import java.lang.System.Logger.Level;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import manager.GerenteManager;
 import modelo.CartaParametros;
 
@@ -16,10 +22,22 @@ import modelo.CartaParametros;
 public class Main extends javax.swing.JFrame {
 
     private GerenteManager gerente;
+    private File selectedFile1;
+    private File selectedFile2;
     /**
      * Creates new form Main
      */
     public Main() {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());//Systema
+//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");//Systema
+//            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());//Metal
+//            MetalLookAndFeel.setCurrentTheme(new OceanTheme());
+//            UIManager.setLookAndFeel("com.sun.java.swing.plaf.motif.MotifLookAndFeel");//feiao
+//            UIManager.setLookAndFeel(new MetalLookAndFeel());
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            
+        }
         initComponents();
          gerente = new GerenteManager();
     }
@@ -49,17 +67,13 @@ public class Main extends javax.swing.JFrame {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         fieldspassedTextField = new javax.swing.JTextField();
-        traitsTextField = new javax.swing.JTextField();
         datafile_1_TextField = new javax.swing.JTextField();
         weightsTextField = new javax.swing.JTextField();
         residualVarianceTextField = new javax.swing.JTextField();
-        randon_1_TextField = new javax.swing.JTextField();
-        effect_1_TextField = new javax.swing.JTextField();
         co_variances_1_TextField = new javax.swing.JTextField();
         effect_2_TextField = new javax.swing.JTextField();
         effect_3_TextField = new javax.swing.JTextField();
         effect_4_TextField = new javax.swing.JTextField();
-        randon_2_TextField = new javax.swing.JTextField();
         datafile_2_TextField = new javax.swing.JTextField();
         co_variances_2_TextField = new javax.swing.JTextField();
         gerarArquivoButton = new javax.swing.JButton();
@@ -68,6 +82,27 @@ public class Main extends javax.swing.JFrame {
         saidaTextArea = new javax.swing.JTextArea();
         viewOutputFileButton = new javax.swing.JButton();
         runRENUMF90 = new javax.swing.JButton();
+        traitsSpinner = new javax.swing.JSpinner();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        effect_1_Spinner = new javax.swing.JSpinner();
+        type_effect_1_ComboBox = new javax.swing.JComboBox<>();
+        form_effect_1_ComboBox = new javax.swing.JComboBox<>();
+        randon_1_ComboBox = new javax.swing.JComboBox<>();
+        openDatafile_1_Button = new javax.swing.JButton();
+        openDatafile_2_Button = new javax.swing.JButton();
+        randon_2_ComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -99,6 +134,10 @@ public class Main extends javax.swing.JFrame {
 
         jLabel14.setText("(CO)VARIANCES:");
 
+        datafile_1_TextField.setEditable(false);
+
+        datafile_2_TextField.setEditable(false);
+
         gerarArquivoButton.setText("Generate File");
         gerarArquivoButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -126,13 +165,84 @@ public class Main extends javax.swing.JFrame {
             }
         });
 
+        jLabel15.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel15.setText("* It is required parameters");
+
+        jLabel16.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel16.setText("*");
+
+        jLabel17.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel17.setText("*");
+
+        jLabel18.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel18.setText("*");
+
+        jLabel19.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel19.setText("*");
+
+        jLabel20.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel20.setText("*");
+
+        jLabel21.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel21.setText("*");
+
+        jLabel22.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel22.setText("*");
+
+        jLabel23.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel23.setText("*");
+
+        jLabel24.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel24.setText("*");
+
+        jLabel25.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel25.setText("*");
+
+        jLabel26.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel26.setText("*");
+
+        jLabel27.setForeground(new java.awt.Color(204, 0, 0));
+        jLabel27.setText("*");
+
+        type_effect_1_ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---", "cross", "cov" }));
+        type_effect_1_ComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                type_effect_1_ComboBoxItemStateChanged(evt);
+            }
+        });
+
+        form_effect_1_ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---", "alpha", "numer" }));
+        form_effect_1_ComboBox.setEnabled(false);
+
+        randon_1_ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---", "diagonal", "sire", "animal" }));
+
+        openDatafile_1_Button.setText("Open file");
+        openDatafile_1_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openDatafile_1_ButtonActionPerformed(evt);
+            }
+        });
+
+        openDatafile_2_Button.setText("Open file");
+        openDatafile_2_Button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                openDatafile_2_ButtonActionPerformed(evt);
+            }
+        });
+
+        randon_2_ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "---", "diagonal", "sire", "animal" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(gerarArquivoButton)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(gerarArquivoButton))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -142,53 +252,83 @@ public class Main extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(109, 109, 109)
-                                        .addComponent(jLabel13))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addGap(76, 76, 76)
                                         .addComponent(jLabel4))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(24, 24, 24)
-                                        .addComponent(jLabel5))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(86, 86, 86)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel7)
-                                            .addComponent(jLabel6)))
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING))
+                                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(50, 50, 50)
-                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel8)
-                                            .addComponent(jLabel9)))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(93, 93, 93)
-                                        .addComponent(jLabel10))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(93, 93, 93)
-                                        .addComponent(jLabel11))
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addGap(86, 86, 86)
-                                        .addComponent(jLabel12)))))
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(86, 86, 86)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel7)
+                                                    .addComponent(jLabel6)))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(24, 24, 24)
+                                                .addComponent(jLabel5))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(50, 50, 50)
+                                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                    .addComponent(jLabel8)
+                                                    .addComponent(jLabel9)))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(93, 93, 93)
+                                                .addComponent(jLabel10))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(93, 93, 93)
+                                                .addComponent(jLabel11))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(86, 86, 86)
+                                                .addComponent(jLabel12))
+                                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                                .addGap(109, 109, 109)
+                                                .addComponent(jLabel13)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel25, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel27, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(datafile_2_TextField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
-                            .addComponent(randon_2_TextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(effect_4_TextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(effect_3_TextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(effect_2_TextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(co_variances_1_TextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(randon_1_TextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(effect_1_TextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(residualVarianceTextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(weightsTextField, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(fieldspassedTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(traitsTextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(datafile_1_TextField, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(co_variances_2_TextField))))
+                            .addComponent(co_variances_2_TextField)
+                            .addComponent(traitsSpinner, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(effect_1_Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(type_effect_1_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(form_effect_1_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(datafile_1_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(openDatafile_1_Button))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(datafile_2_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(openDatafile_2_Button))
+                            .addComponent(randon_2_ComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(randon_1_ComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(18, 18, 18)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -209,11 +349,14 @@ public class Main extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(datafile_1_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(datafile_1_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16)
+                            .addComponent(openDatafile_1_Button))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(traitsTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(traitsSpinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel17))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(fieldspassedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -225,45 +368,60 @@ public class Main extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(residualVarianceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel20))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6)
-                            .addComponent(effect_1_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel19)
+                            .addComponent(effect_1_Spinner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(type_effect_1_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(form_effect_1_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(randon_1_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel18)
+                            .addComponent(randon_1_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel8)
-                            .addComponent(co_variances_1_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(co_variances_1_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel21))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(effect_2_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel22))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(effect_3_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10))
+                            .addComponent(jLabel10)
+                            .addComponent(jLabel23))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel11)
-                            .addComponent(effect_4_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(effect_4_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel24))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(randon_2_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12))
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel25)
+                            .addComponent(randon_2_ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(datafile_2_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13))
+                            .addComponent(jLabel13)
+                            .addComponent(jLabel26)
+                            .addComponent(openDatafile_2_Button))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(co_variances_2_TextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel14))
+                            .addComponent(jLabel14)
+                            .addComponent(jLabel27))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(gerarArquivoButton)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(gerarArquivoButton)
+                            .addComponent(jLabel15))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -296,17 +454,19 @@ public class Main extends javax.swing.JFrame {
                 co_variances_2_TextField.getText(), 
                 datafile_1_TextField.getText(),
                 datafile_2_TextField.getText(),
-                effect_1_TextField.getText(),
+                effect_1_Spinner.getValue().toString()+" "+
+                        type_effect_1_ComboBox.getSelectedItem().toString()+" "+
+                        (form_effect_1_ComboBox.getSelectedIndex() != 0 ?
+                        form_effect_1_ComboBox.getSelectedItem().toString() : ""),
                 effect_2_TextField.getText(), 
                 effect_3_TextField.getText(),
                 effect_4_TextField.getText(),
                 fieldspassedTextField.getText(),
-                randon_1_TextField.getText(),
-                randon_2_TextField.getText(),
+                randon_1_ComboBox.getSelectedItem().toString(),
+                randon_2_ComboBox.getSelectedItem().toString(),
                 residualVarianceTextField.getText(),
-                traitsTextField.getText(),
+                traitsSpinner.getValue().toString(),
                 weightsTextField.getText());
-        
         gerente.setCarta(carta);
         if(gerente.salvarArquivo()){
             JOptionPane.showMessageDialog(null, "Arquivo salvo com sucesso!");
@@ -322,6 +482,43 @@ public class Main extends javax.swing.JFrame {
     private void runRENUMF90ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runRENUMF90ActionPerformed
         gerente.chamarExeRenumF90();
     }//GEN-LAST:event_runRENUMF90ActionPerformed
+
+    private void type_effect_1_ComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_type_effect_1_ComboBoxItemStateChanged
+        if(type_effect_1_ComboBox.getSelectedItem().toString().equals("cross")){
+            form_effect_1_ComboBox.setEnabled(true);
+        }else{
+            form_effect_1_ComboBox.setSelectedIndex(0);
+            form_effect_1_ComboBox.setEnabled(false);
+        }
+    }//GEN-LAST:event_type_effect_1_ComboBoxItemStateChanged
+
+    private void openDatafile_1_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openDatafile_1_ButtonActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "TXT, TSV & CSV Files", "txt", "csv", "tsv");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            selectedFile1 = chooser.getSelectedFile();
+            datafile_1_TextField.setText(selectedFile1.getName());
+        } else {
+            JOptionPane.showMessageDialog(null, "The file type can not be read.", "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_openDatafile_1_ButtonActionPerformed
+
+    private void openDatafile_2_ButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openDatafile_2_ButtonActionPerformed
+        JFileChooser chooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter(
+                "TXT, TSV & CSV Files", "txt", "csv", "tsv");
+        chooser.setFileFilter(filter);
+        int returnVal = chooser.showOpenDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            selectedFile2 = chooser.getSelectedFile();
+            datafile_2_TextField.setText(selectedFile2.getName());
+        } else {
+            JOptionPane.showMessageDialog(null, "The file type can not be read.", "Erro!", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_openDatafile_2_ButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -339,13 +536,7 @@ public class Main extends javax.swing.JFrame {
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Main.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
@@ -363,11 +554,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField co_variances_2_TextField;
     private javax.swing.JTextField datafile_1_TextField;
     private javax.swing.JTextField datafile_2_TextField;
-    private javax.swing.JTextField effect_1_TextField;
+    private javax.swing.JSpinner effect_1_Spinner;
     private javax.swing.JTextField effect_2_TextField;
     private javax.swing.JTextField effect_3_TextField;
     private javax.swing.JTextField effect_4_TextField;
     private javax.swing.JTextField fieldspassedTextField;
+    private javax.swing.JComboBox<String> form_effect_1_ComboBox;
     private javax.swing.JButton gerarArquivoButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -375,7 +567,20 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -386,12 +591,15 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField randon_1_TextField;
-    private javax.swing.JTextField randon_2_TextField;
+    private javax.swing.JButton openDatafile_1_Button;
+    private javax.swing.JButton openDatafile_2_Button;
+    private javax.swing.JComboBox<String> randon_1_ComboBox;
+    private javax.swing.JComboBox<String> randon_2_ComboBox;
     private javax.swing.JTextField residualVarianceTextField;
     private javax.swing.JButton runRENUMF90;
     private javax.swing.JTextArea saidaTextArea;
-    private javax.swing.JTextField traitsTextField;
+    private javax.swing.JSpinner traitsSpinner;
+    private javax.swing.JComboBox<String> type_effect_1_ComboBox;
     private javax.swing.JButton viewOutputFileButton;
     private javax.swing.JTextField weightsTextField;
     // End of variables declaration//GEN-END:variables
